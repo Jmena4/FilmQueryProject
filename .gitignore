@@ -1,1 +1,3 @@
-".DS_Store", "target", and "bin", save and quit atom.
+.DS_Store
+ target
+ bin

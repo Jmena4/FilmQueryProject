@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Film {
 
-	private List<Actor> filmActors = new ArrayList<>();
+	private List<Actor> filmActors;
 
 	public List<Actor> getFilmActors() {
 		return filmActors;
@@ -184,7 +184,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
+		return "Film [id= " + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
 				+ ", specialFeatures=" + specialFeatures + "]";

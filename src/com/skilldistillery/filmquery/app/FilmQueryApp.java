@@ -41,18 +41,48 @@ public class FilmQueryApp {
 			choice = input.nextInt();
 			if (choice == 1) {
 				System.out.print("Enter film id to search: ");
-				int filmId = input.nextInt();
-				Film film = db.findFilmById(filmId);
-				System.out.print(film);
+				int filmId;
+				try {
+					filmId = input.nextInt();
+					Film film = db.findFilmById(filmId);
+					printFindFilmByIdDisplay(film);
+				} catch (Exception e) {
+					System.err.println("Entry not found.");
+				}
+
 			} else if (choice == 2) {
 				System.out.print("Enter film keyword to search: ");
-				String filmId = input.next();
-				List<Film> films = db.findFilmByKeyword(filmId);
-				System.out.println(films);
+				String filmId;
+				try {
+					filmId = input.next();
+					List<Film> films = db.findFilmByKeyword(filmId);
+					printFindFilmByKeywordDisplay(films);
+				} catch (Exception e) {
+					System.err.println("Keyword not found, try again.");
+				}
 			} else {
 				System.out.println("\n Exiting...");
 				System.exit(1);
 			}
 		} while (choice != 3);
+	}
+
+
+	private void printFindFilmByIdDisplay(Film film) {
+		System.out.println("************Film************");
+		System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
+				+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\n");
+	}
+
+	private void printFindFilmByKeywordDisplay(List<Film> films) {
+		for (Film film : films) {
+
+			System.out.println("************Film************");
+			System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
+					+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\n");
+		}
+		{
+
+		}
 	}
 }

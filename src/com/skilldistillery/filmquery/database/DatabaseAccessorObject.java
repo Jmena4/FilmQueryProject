@@ -82,12 +82,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getInt(9));
 				film.setRating(rs.getString(10));
 				film.setSpecialFeatures(rs.getString(11));
-
+				
 				films.add(film);
 			}
 		} catch (SQLException sqle) {
 			System.err.println(sqle);
 		}
+		
 		return films;
 	}
 

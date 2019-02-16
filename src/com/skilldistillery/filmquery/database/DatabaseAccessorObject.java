@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Film;
 
@@ -55,15 +57,16 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public Film findFilmByKeyword(int filmId) {
+	public List<Film> findFilmByKeyword(String filmKeyword) {
+		List<Film> films = new ArrayList<>();
 		Film film = null;
 		String user = "student";
 		String pass = "student";
-		String sqltxt = "SELECT id, title, description, release_year, language_id, rental_duration, rental_rate, length,"
-				+ " replacement_cost, rating, special_features FROM film WHERE id = ?";
+		String sqltxt = "SELECT id, title, description, release_year, language_id, rental_duration, rental_rate, length,  replacement_cost, rating, special_features FROM film WHERE description LIKE ? OR title LIKE ?";
 		try (Connection conn = DriverManager.getConnection(URL, user, pass);
 				PreparedStatement stmt = conn.prepareStatement(sqltxt);) {
-			stmt.setInt(1, filmId);
+			stmt.setString(1, "%" + filmKeyword + "%");
+			stmt.setString(2, "%" + filmKeyword + "%");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				film = new Film();
@@ -79,11 +82,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getInt(9));
 				film.setRating(rs.getString(10));
 				film.setSpecialFeatures(rs.getString(11));
+
+				films.add(film);
 			}
 		} catch (SQLException sqle) {
 			System.err.println(sqle);
 		}
-		return film;
+		return films;
 	}
 
 //	@Override

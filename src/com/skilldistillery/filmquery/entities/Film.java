@@ -187,7 +187,7 @@ public class Film {
 		return "Film [id= " + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + "]";
+				+ ", specialFeatures=" + specialFeatures + "]\n";
 	}
 
 	public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,

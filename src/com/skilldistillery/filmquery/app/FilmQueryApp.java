@@ -67,22 +67,19 @@ public class FilmQueryApp {
 		} while (choice != 3);
 	}
 
-
 	private void printFindFilmByIdDisplay(Film film) {
-		System.out.println("************Film************");
+		System.out.println("\n************ Film ************");
 		System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
-				+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\n");
+				+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\nLanguage: "
+				+ film.getLanguageName() + "\n");
 	}
 
 	private void printFindFilmByKeywordDisplay(List<Film> films) {
 		for (Film film : films) {
-
-			System.out.println("************Film************");
+			System.out.println("\n************ Film ************");
 			System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
-					+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\n");
-		}
-		{
-
+					+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\nLanguage: "
+					+ film.getLanguageName() + "\n");
 		}
 	}
 }

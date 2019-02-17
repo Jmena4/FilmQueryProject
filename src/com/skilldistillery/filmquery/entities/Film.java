@@ -26,6 +26,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private String languageName;
 
 	public int getId() {
 		return id;
@@ -114,14 +115,26 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((filmActors == null) ? 0 : filmActors.hashCode());
 		result = prime * result + id;
 		result = prime * result + languageId;
+		result = prime * result + ((languageName == null) ? 0 : languageName.hashCode());
 		result = prime * result + length;
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + releaseYear;
@@ -150,9 +163,19 @@ public class Film {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
+		if (filmActors == null) {
+			if (other.filmActors != null)
+				return false;
+		} else if (!filmActors.equals(other.filmActors))
+			return false;
 		if (id != other.id)
 			return false;
 		if (languageId != other.languageId)
+			return false;
+		if (languageName == null) {
+			if (other.languageName != null)
+				return false;
+		} else if (!languageName.equals(other.languageName))
 			return false;
 		if (length != other.length)
 			return false;
@@ -184,15 +207,18 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id= " + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + "]\n";
+		return "Film [filmActors=" + filmActors + ", id=" + id + ", title=" + title + ", description=" + description
+				+ ", releaseYear=" + releaseYear + ", languageId=" + languageId + ", rentalDuration=" + rentalDuration
+				+ ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost=" + replacementCost
+				+ ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", languageName=" + languageName
+				+ "]";
 	}
-
-	public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
-			double rentalRate, int length, double replacementCost, String rating, String specialFeatures) {
+	
+	public Film(List<Actor> filmActors, int id, String title, String description, int releaseYear, int languageId,
+			int rentalDuration, double rentalRate, int length, double replacementCost, String rating,
+			String specialFeatures, String languageName) {
 		super();
+		this.filmActors = filmActors;
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -204,8 +230,9 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		this.languageName = languageName;
 	}
-
+	
 	public Film() {
 		super();
 	}

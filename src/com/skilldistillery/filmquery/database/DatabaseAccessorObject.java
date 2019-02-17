@@ -120,7 +120,25 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	@Override
 	public List<Actor> findActorsByFilmId(int filmId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Actor> actors = new ArrayList<>();
+		Actor actor = null;
+		String user = "student";
+		String pass = "student";
+		String sqltxt = "SELECT actor.first_name, actor.last_name FROM actor";
+		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement stmt = conn.prepareStatement(sqltxt);) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				actor = new Actor();
+				actor.setFirstName(rs.getString("actor.first_name"));
+				actor.setFirstName(rs.getString("actor.last_name"));
+				actor.setFirstName(rs.getString("actor.last_name"));
+				actors.add(actor);
+			}
+		} catch (SQLException sqle) {
+			System.err.println(sqle);
+		}
+
+		return actors;
 	}
 }

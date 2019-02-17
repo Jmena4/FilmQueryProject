@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
 	DatabaseAccessor db = new DatabaseAccessorObject();
 
 	public static void main(String[] args) {
-//		System.out.println("1. Film Query App started.");
 		FilmQueryApp app = new FilmQueryApp();
 //		app.test();
 		app.launch();
@@ -37,15 +37,19 @@ public class FilmQueryApp {
 		int choice = 0;
 		do {
 			System.out.print(
-					"Choose one of the following options: \n1) Select film by id \n2) Select film by keyword \n3) Exit program \n");
+					"\nChoose one of the following options: \n1) Select film by id \n2) Select film by keyword \n3) Exit program \n");
 			choice = input.nextInt();
 			if (choice == 1) {
 				System.out.print("Enter film id to search: ");
 				int filmId;
+				int actorId = 0;
 				try {
 					filmId = input.nextInt();
 					Film film = db.findFilmById(filmId);
+					Actor actor = db.findActorById(actorId);
 					printFindFilmByIdDisplay(film);
+					printFindActorById();
+					System.out.println();
 				} catch (Exception e) {
 					System.err.println("Entry not found.");
 				}
@@ -56,6 +60,7 @@ public class FilmQueryApp {
 				try {
 					filmId = input.next();
 					List<Film> films = db.findFilmByKeyword(filmId);
+//					List<Actor> actor = db.findActorsByFilmId(filmId);
 					printFindFilmByKeywordDisplay(films);
 				} catch (Exception e) {
 					System.err.println("Keyword not found, try again.");
@@ -65,6 +70,11 @@ public class FilmQueryApp {
 				System.exit(1);
 			}
 		} while (choice != 3);
+	}
+
+	private void printFindActorById() {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void printFindFilmByIdDisplay(Film film) {

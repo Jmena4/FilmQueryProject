@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Film {
 
-	private List<Film> filmActors;
+	private List<Actor> filmActors;
 
-	public List<Film> getFilmActors() {
+	public List<Actor> getFilmActors() {
 		return filmActors;
 	}
 
-	public void setFilmActors(List<Film> filmActors) {
+	public void setFilmActors(List<Actor> filmActors) {
 		this.filmActors = filmActors;
 	}
 
@@ -123,7 +123,9 @@ public class Film {
 		this.languageName = languageName;
 	}
 
-	public Film(List<Film> filmActors, int id, String title, String description, int releaseYear, int languageId,
+	
+
+	public Film(List<Actor> filmActors, int id, String title, String description, int releaseYear, int languageId,
 			int rentalDuration, double rentalRate, int length, double replacementCost, String rating,
 			String specialFeatures, String languageName) {
 		super();

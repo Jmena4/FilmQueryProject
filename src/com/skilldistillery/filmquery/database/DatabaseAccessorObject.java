@@ -49,6 +49,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setRating(rs.getString(10));
 				film.setSpecialFeatures(rs.getString(11));
 				film.setLanguageName(rs.getString(12));
+				film.setFilmActors(findActorsByFilmId(film.getId()));
 			}
 		} catch (SQLException sqle) {
 			System.err.println(sqle);

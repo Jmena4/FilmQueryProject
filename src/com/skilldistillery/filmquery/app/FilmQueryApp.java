@@ -84,6 +84,11 @@ public class FilmQueryApp {
 		System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
 				+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\nLanguage: "
 				+ film.getLanguageName() + "\n");
+		System.out.println("\n************ Actors ************");
+		for (Actor actors : film.getFilmActors()) {
+			System.out.println("First_name: " + actors.getFirstName()
+					+ ", Last_name: " + actors.getLastName());
+		}
 	}
 
 	private void printFindFilmByKeywordDisplay(List<Film> films) {
@@ -97,8 +102,8 @@ public class FilmQueryApp {
 			System.out.println("\n************ Actors ************");
 //////			printFindActorByIdDisplay(listFilmId);
 			for (Actor actors : film.getFilmActors()) {
-				System.out.println("Actor Id: " + actors.getId() + " First_name: '" + actors.getFirstName()
-						+ "\nLast_name: " + actors.getLastName());
+				System.out.println("First_name: " + actors.getFirstName()
+						+ ", Last_name: " + actors.getLastName());
 			}
 		}
 	}

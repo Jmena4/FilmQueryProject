@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.app;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,8 +21,8 @@ public class FilmQueryApp {
 	private void test() {
 //		Film film = db.findFilmById(0);
 //		System.out.println(film);
-//		Actor actor = db.findActorById(1);
-//		System.out.println(actor);
+//		List<Actor> film = db.findActorsByFilmId(30);
+//		System.out.println(film);
 
 	}
 
@@ -41,14 +42,12 @@ public class FilmQueryApp {
 			choice = input.nextInt();
 			if (choice == 1) {
 				System.out.print("Enter film id to search: ");
+
 				int filmId;
-				int actorId = 0;
 				try {
 					filmId = input.nextInt();
 					Film film = db.findFilmById(filmId);
-					Actor actor = db.findActorById(actorId);
 					printFindFilmByIdDisplay(film);
-					printFindActorById();
 					System.out.println();
 				} catch (Exception e) {
 					System.err.println("Entry not found.");
@@ -56,12 +55,12 @@ public class FilmQueryApp {
 
 			} else if (choice == 2) {
 				System.out.print("Enter film keyword to search: ");
-				String filmId;
+				String keyword;
 				try {
-					filmId = input.next();
-					List<Film> films = db.findFilmByKeyword(filmId);
-//					List<Actor> actor = db.findActorsByFilmId(filmId);
-					printFindFilmByKeywordDisplay(films);
+					keyword = input.next();
+					List<Film> film = db.findFilmByKeyword(keyword);
+					printFindFilmByKeywordDisplay(film);
+
 				} catch (Exception e) {
 					System.err.println("Keyword not found, try again.");
 				}
@@ -70,11 +69,13 @@ public class FilmQueryApp {
 				System.exit(1);
 			}
 		} while (choice != 3);
+
 	}
 
-	private void printFindActorById() {
-		// TODO Auto-generated method stub
-
+	private void printFindActorByIdDisplay(List<Actor> actors) {
+		for (Actor actor : actors) {
+			System.out.println("First_name: '" + actor.getFirstName() + "\nLast_name: " + actor.getLastName());
+		}
 	}
 
 	private void printFindFilmByIdDisplay(Film film) {
@@ -85,11 +86,15 @@ public class FilmQueryApp {
 	}
 
 	private void printFindFilmByKeywordDisplay(List<Film> films) {
+		Actor actor = new Actor();
+		List<Actor> actors = actor.getActor();
 		for (Film film : films) {
 			System.out.println("\n************ Film ************");
 			System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
 					+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\nLanguage: "
 					+ film.getLanguageName() + "\n");
+			System.out.println("\n************ Actors ************");
+			printFindActorByIdDisplay(actors);
 		}
 	}
 }

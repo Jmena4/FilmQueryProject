@@ -29,8 +29,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String user = "student";
 		String pass = "student";
 
-//		String sqltxt = "SELECT id, title, description, release_year, language_id, rental_duration, rental_rate, length,"
-//				+ " replacement_cost, rating, special_features FROM film WHERE id = ?";
 		String sqltxt = "SELECT  film.id, film.title, film.description, film.release_year, film.language_id, film.rental_duration, film.rental_rate, film.length,  film.replacement_cost, film.rating, film.special_features, language.name FROM film JOIN language ON film.language_id = language.id WHERE film.id = ?";
 		try (Connection conn = DriverManager.getConnection(URL, user, pass);
 				PreparedStatement stmt = conn.prepareStatement(sqltxt);) {
@@ -60,7 +58,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	@Override
 	public List<Film> findFilmByKeyword(String filmKeyword) {
-		List<Film> films = new ArrayList<>();
+		List<Film> filmKeywords = new ArrayList<>();
 		Film film = null;
 		String user = "student";
 		String pass = "student";
@@ -85,14 +83,14 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setSpecialFeatures(rs.getString(11));
 				film.setLanguageName(rs.getString(12));
 
-				films.add(film);
+				filmKeywords.add(film);
 
 			}
 		} catch (SQLException sqle) {
 			System.err.println(sqle);
 		}
 
-		return films;
+		return filmKeywords;
 	}
 
 	@Override
@@ -100,17 +98,17 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Actor actor = null;
 		String user = "student";
 		String pass = "student";
-		String sqltxt = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
+		String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
 		try (Connection conn = DriverManager.getConnection(URL, user, pass);
-				PreparedStatement stmt = conn.prepareStatement(sqltxt);) {
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, actorId);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			ResultSet actorResult = stmt.executeQuery();
+			if (actorResult.next()) {
 				actor = new Actor(); // Create the object
 				// Here is our mapping of query columns to our object fields:
-				actor.setId(rs.getInt(1));
-				actor.setFirstName(rs.getString(2));
-				actor.setLastName(rs.getString(3));
+				actor.setId(actorResult.getInt(1));
+				actor.setFirstName(actorResult.getString(2));
+				actor.setLastName(actorResult.getString(3));
 			}
 		} catch (SQLException sqle) {
 			System.err.println(sqle);
@@ -124,21 +122,30 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Actor actor = null;
 		String user = "student";
 		String pass = "student";
-		String sqltxt = "SELECT actor.first_name, actor.last_name FROM actor";
+		String sql = "SELECT actor.id, first_name, last_name "
+				+ " FROM film JOIN film_actor ON film.id = film_actor.film_id "
+				+ "JOIN actor ON film_actor.actor_id = actor.id " + "WHERE film.id = ?";
 		try (Connection conn = DriverManager.getConnection(URL, user, pass);
-				PreparedStatement stmt = conn.prepareStatement(sqltxt);) {
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				actor = new Actor();
-				actor.setFirstName(rs.getString("actor.first_name"));
-				actor.setFirstName(rs.getString("actor.last_name"));
-				actor.setFirstName(rs.getString("actor.last_name"));
+				actor.setId(rs.getInt("actor.id"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
 				actors.add(actor);
+				actor.setActor(actors);
+				System.out.println(actors);
 			}
-		} catch (SQLException sqle) {
-			System.err.println(sqle);
-		}
+		} catch (
 
+		SQLException e) {
+			e.printStackTrace();
+		}
 		return actors;
+
 	}
+
 }

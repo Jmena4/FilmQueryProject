@@ -29,7 +29,6 @@ public class FilmQueryApp {
 	private void launch() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Film Query App started... \n");
-		startUserInterface(input);
 
 		input.close();
 	}
@@ -73,37 +72,32 @@ public class FilmQueryApp {
 
 	}
 
-//	private void printFindActorByIdDisplay(List<Actor> actors) {
-//		for (Actor actor : actors) {
-//			System.out.println("First_name: '" + actor.getFirstName() + "\nLast_name: " + actor.getLastName());
-//		}
-//	}
+	private void printFindActorByIdDisplay(List<Actor> actors) {
+		for (Actor actor : actors) {
+			System.out.println("First_name: '" + actor.getFirstName() + "\nLast_name: " + actor.getLastName());
+		}
+	}
 
 	private void printFindFilmByIdDisplay(Film film) {
-		System.out.println("\n************ Film ************");
+		System.out.println("\n************ " + film.getId() + ") Film ************");
 		System.out.println("Title: '" + film.getTitle() + "' \nYear: '" + film.getReleaseYear() + "' \nRating: '"
 				+ film.getRating() + "' \nDescription: '" + film.getDescription() + "'\nLanguage: "
 				+ film.getLanguageName() + "\n");
-		System.out.println("\n************ Actors ************");
+		System.out.println("\n************ " + film.getId() + ") Actors ************");
 		for (Actor actors : film.getFilmActors()) {
-			System.out.println("First_name: " + actors.getFirstName()
-					+ ", Last_name: " + actors.getLastName());
+			System.out.println("First_name: " + actors.getFirstName() + ", Last_name: " + actors.getLastName());
 		}
 	}
 
 	private void printFindFilmByKeywordDisplay(List<Film> films) {
 		for (Film film : films) {
-			System.out.println("\n************ Film ************");
+			System.out.println("\n************ " + film.getId() + ") Film ************");
 			System.out.println("Id; " + film.getId() + " Title: '" + film.getTitle() + "' \nYear: '"
 					+ film.getReleaseYear() + "' \nRating: '" + film.getRating() + "' \nDescription: '"
 					+ film.getDescription() + "'\nLanguage: " + film.getLanguageName() + "\n");
-//			int filmId = film.getId();
-//			System.out.println(film.getFilmActors());
-			System.out.println("\n************ Actors ************");
-//////			printFindActorByIdDisplay(listFilmId);
+			System.out.println("\n************ " + film.getId() + ") Actors ************");
 			for (Actor actors : film.getFilmActors()) {
-				System.out.println("First_name: " + actors.getFirstName()
-						+ ", Last_name: " + actors.getLastName());
+				System.out.println("First_name: " + actors.getFirstName() + ", Last_name: " + actors.getLastName());
 			}
 		}
 	}

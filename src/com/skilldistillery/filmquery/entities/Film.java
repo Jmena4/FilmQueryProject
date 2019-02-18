@@ -1,17 +1,16 @@
 package com.skilldistillery.filmquery.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Film {
 
-	private List<Actor> filmActors;
+	private List<Film> filmActors;
 
-	public List<Actor> getFilmActors() {
+	public List<Film> getFilmActors() {
 		return filmActors;
 	}
 
-	public void setFilmActors(List<Actor> filmActors) {
+	public void setFilmActors(List<Film> filmActors) {
 		this.filmActors = filmActors;
 	}
 
@@ -115,7 +114,7 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
-	
+
 	public String getLanguageName() {
 		return languageName;
 	}
@@ -124,7 +123,33 @@ public class Film {
 		this.languageName = languageName;
 	}
 
-	
+	public Film(List<Film> filmActors, int id, String title, String description, int releaseYear, int languageId,
+			int rentalDuration, double rentalRate, int length, double replacementCost, String rating,
+			String specialFeatures, String languageName) {
+		super();
+		this.filmActors = filmActors;
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.releaseYear = releaseYear;
+		this.languageId = languageId;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.length = length;
+		this.replacementCost = replacementCost;
+		this.rating = rating;
+		this.specialFeatures = specialFeatures;
+		this.languageName = languageName;
+	}
+
+	@Override
+	public String toString() {
+		return "Film [filmActors=" + filmActors + ", id=" + id + ", title=" + title + ", description=" + description
+				+ ", releaseYear=" + releaseYear + ", languageId=" + languageId + ", rentalDuration=" + rentalDuration
+				+ ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost=" + replacementCost
+				+ ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", languageName=" + languageName
+				+ "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -205,34 +230,6 @@ public class Film {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Film [filmActors=" + filmActors + ", id=" + id + ", title=" + title + ", description=" + description
-				+ ", releaseYear=" + releaseYear + ", languageId=" + languageId + ", rentalDuration=" + rentalDuration
-				+ ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost=" + replacementCost
-				+ ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", languageName=" + languageName
-				+ "]";
-	}
-	
-	public Film(List<Actor> filmActors, int id, String title, String description, int releaseYear, int languageId,
-			int rentalDuration, double rentalRate, int length, double replacementCost, String rating,
-			String specialFeatures, String languageName) {
-		super();
-		this.filmActors = filmActors;
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.releaseYear = releaseYear;
-		this.languageId = languageId;
-		this.rentalDuration = rentalDuration;
-		this.rentalRate = rentalRate;
-		this.length = length;
-		this.replacementCost = replacementCost;
-		this.rating = rating;
-		this.specialFeatures = specialFeatures;
-		this.languageName = languageName;
-	}
-	
 	public Film() {
 		super();
 	}
